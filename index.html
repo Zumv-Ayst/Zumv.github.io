@@ -53,6 +53,34 @@
       font-size: 18px;
       font-weight: 800;
       letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .telegram-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s ease;
+      color: #e5e7eb;
+      flex: 0 0 auto;
+    }
+
+    .telegram-icon:hover {
+      transform: scale(1.15);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
     }
 
     .nav-links {
@@ -64,6 +92,39 @@
 
     .nav-links a:hover {
       color: #ffffff;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      flex: 0 0 auto;
+    }
+
+    .lang-switch button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: #cbd5e1;
+      background: transparent;
+      font-weight: 800;
+      font-size: 13px;
+      transition: 0.2s ease;
+    }
+
+    .lang-switch button:hover {
+      color: #ffffff;
+      background: rgba(96, 165, 250, 0.12);
+    }
+
+    .lang-switch button.active {
+      color: #07111f;
+      background: #60a5fa;
     }
 
     .hero {
@@ -189,17 +250,9 @@
       background: radial-gradient(circle, rgba(96, 165, 250, 0.46), transparent 68%);
     }
 
-    .initials {
-      width: 116px;
-      height: 116px;
-      display: grid;
-      place-items: center;
-      border-radius: 32px;
-      background: linear-gradient(135deg, #60a5fa, #a78bfa);
-      color: #ffffff;
-      font-size: 42px;
-      font-weight: 900;
-      margin-bottom: 26px;
+    .profile-card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .profile-card h2 {
@@ -219,6 +272,16 @@
       gap: 12px;
       color: #dbeafe;
       font-size: 15px;
+    }
+
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 26px;
+      border: 3px solid rgba(255,255,255,0.15);
+      display: block;
     }
 
     section {
@@ -401,6 +464,11 @@
 
       .nav {
         align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .nav-right {
+        margin-left: auto;
       }
 
       .nav-links {
@@ -410,44 +478,64 @@
       .timeline-head {
         flex-direction: column;
       }
+
+      .profile-photo {
+        width: 140px;
+        height: 140px;
+      }
+
+      .profile-card {
+        overflow: hidden;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="page nav">
-      <a class="logo" href="#top">Yaroslav Klimchuk</a>
-      <nav class="nav-links" aria-label="Основна навігація">
-        <a href="#about">Про мене</a>
-        <a href="#experience">Досвід</a>
-        <a href="#projects">Проєкти</a>
-        <a href="#skills">Навички</a>
-        <a href="#contact">Контакти</a>
-      </nav>
+      <div class="logo-section">
+        <a class="logo" href="#top">Yaroslav Klimchuk</a>
+        <a href="https://t.me/yklim_23" class="telegram-icon" title="Telegram" target="_blank" rel="noopener noreferrer">
+          <img src="telegram.svg" alt="Telegram" width="24" height="24">
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <nav class="nav-links" aria-label="Основна навігація">
+          <a href="#about" data-i18n="nav.about">Про мене</a>
+          <a href="#experience" data-i18n="nav.experience">Досвід</a>
+          <a href="#projects" data-i18n="nav.projects">Проєкти</a>
+          <a href="#skills" data-i18n="nav.skills">Навички</a>
+          <a href="#contact" data-i18n="nav.contact">Контакти</a>
+        </nav>
+
+        <div class="lang-switch" aria-label="Language switcher">
+          <button type="button" data-lang="ua" class="active">UA</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
     </div>
   </header>
 
   <main id="top" class="page">
     <section class="hero">
       <div>
-        <div class="badge">Business Analyst · Kyiv, Ukraine</div>
+        <div class="badge" data-i18n="hero.badge">Бізнес-аналітик · Київ, Україна</div>
         <h1>Yaroslav Klimchuk</h1>
-        <p class="hero-text">
-          Business Analyst з досвідом збору та аналізу вимог, моделювання бізнес-процесів,
-          прототипування інтерфейсів, роботи з даними, автоматизації звітності та впровадження
-          стандартів документації для продуктових і бізнес-команд.
+        <p class="hero-text" data-i18n="hero.text">
+          Бізнес-аналітик з досвідом збору та аналізу вимог, моделювання бізнес-процесів, прототипування інтерфейсів, роботи з даними, автоматизації звітності та впровадження стандартів документації для продуктових і бізнес-команд.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="mailto:Yaroslavklimchukk@gmail.com">Написати на email</a>
-          <a class="button secondary" href="tel:+380956806179">Подзвонити</a>
+          <a class="button primary" href="mailto:Yaroslavklimchukk@gmail.com" data-i18n="hero.email">Написати на email</a>
+          <a class="button secondary" href="tel:+380956806179" data-i18n="hero.call">Подзвонити</a>
         </div>
         <div class="quick-info" aria-label="Контактна інформація">
           <div>
-            <span>Локація</span>
-            <strong>Ukraine, Kyiv</strong>
+            <span data-i18n="quick.location.label">Локація</span>
+            <strong data-i18n="quick.location.value">Україна, Київ</strong>
           </div>
           <div>
-            <span>Телефон</span>
+            <span data-i18n="quick.phone">Телефон</span>
             <strong>+380956806179</strong>
           </div>
           <div>
@@ -459,15 +547,14 @@
 
       <aside class="profile-card" aria-label="Профіль">
         <img src="Photo.jpg" alt="Yaroslav Klimchuk" class="profile-photo">
-        <h2>25 y.o · Business Analyst</h2>
-        <p>
-          Поєдную бізнес-аналіз, data-driven підхід, low-code автоматизацію та сильне документування,
-          щоб переводити бізнес-потреби у зрозумілі вимоги для розробки.
+        <h2 data-i18n="profile.title">25 років · Бізнес-аналітик</h2>
+        <p data-i18n="profile.text">
+          Поєдную бізнес-аналіз, data-driven підхід, low-code автоматизацію та сильне документування, щоб переводити бізнес-потреби у зрозумілі вимоги для розробки.
         </p>
         <div class="profile-list">
-          <span>• Functional & technical requirements</span>
+          <span data-i18n="profile.item1">• Функціональні та технічні вимоги</span>
           <span>• BPMN 2.0, UML, ERD</span>
-          <span>• REST / SOAP API integration analysis</span>
+          <span data-i18n="profile.item3">• Аналіз інтеграцій REST / SOAP API</span>
           <span>• PowerBI, Tableau, Python, SQL</span>
           <span>• Jira / Atlassian workspace</span>
         </div>
@@ -476,24 +563,20 @@
 
     <section id="about">
       <div class="section-title">
-        <h2>Про мене</h2>
-        <p>Короткий профіль на основі CV: фокус на бізнес-аналізі, автоматизації, документації та взаємодії зі стейкхолдерами.</p>
+        <h2 data-i18n="about.title">Про мене</h2>
+        <p data-i18n="about.subtitle">Короткий профіль на основі CV: фокус на бізнес-аналізі, автоматизації, документації та взаємодії зі стейкхолдерами.</p>
       </div>
       <div class="grid-2">
         <article class="section-card">
-          <h3>Що роблю</h3>
-          <p>
-            Збираю та аналізую вимоги, проводжу інтерв’ю з командами, описую процеси,
-            створюю прототипи інтерфейсів, готую документацію та супроводжую узгодження
-            між бізнесом, продуктом і розробкою.
+          <h3 data-i18n="about.card1.title">Що роблю</h3>
+          <p data-i18n="about.card1.text">
+            Збираю та аналізую вимоги, проводжу інтерв’ю з командами, описую процеси, створюю прототипи інтерфейсів, готую документацію та супроводжую узгодження між бізнесом, продуктом і розробкою.
           </p>
         </article>
         <article class="section-card">
-          <h3>Сильні сторони</h3>
-          <p>
-            Досвід у кросфункціональних і кросмовних командах, переговори з аутсорсинговими
-            командами, підтримка корпоративної бази знань, навчання інтернів та впровадження
-            AI-інструментів у робочі процеси.
+          <h3 data-i18n="about.card2.title">Сильні сторони</h3>
+          <p data-i18n="about.card2.text">
+            Досвід у кросфункціональних і кросмовних командах, переговори з аутсорсинговими командами, підтримка корпоративної бази знань, навчання інтернів та впровадження AI-інструментів у робочі процеси.
           </p>
         </article>
       </div>
@@ -501,8 +584,8 @@
 
     <section id="experience">
       <div class="section-title">
-        <h2>Досвід роботи</h2>
-        <p>Ключові ролі та результати у бізнес-аналізі, автоматизації, роботі з вимогами та документацією.</p>
+        <h2 data-i18n="experience.title">Досвід роботи</h2>
+        <p data-i18n="experience.subtitle">Ключові ролі та результати у бізнес-аналізі, автоматизації, роботі з вимогами та документацією.</p>
       </div>
 
       <div class="timeline">
@@ -510,18 +593,28 @@
           <div class="timeline-head">
             <div>
               <h3>Business Analyst · SoftSvit</h3>
-              <p>Основні стейкхолдери: Call center, Product Analysts, Product Managers</p>
+              <p data-i18n="softsvit.stakeholders">Основні стейкхолдери: Call center, Product Analysts, Product Managers</p>
             </div>
             <strong>Aug 2025 — Apr 2026</strong>
           </div>
           <ul>
-            <li>Постійний збір та аналіз вимог від product manager.</li>
-            <li>Підтримка корпоративної бази знань.</li>
-            <li>Проведення кросфункціональних зустрічей у процесі розробки ПЗ.</li>
-            <li>Узгодження вимог між бізнесом і розробкою.</li>
-            <li>Розробка та імплементація стандартних шаблонів подачі задач на розробку від бізнес-команд.</li>
-            <li>Онбординг двох бізнес-аналітиків.</li>
-            <li>Презентація доопрацювань для бізнесу через діаграми, презентації та прототипи.</li>
+            <li data-i18n="softsvit.li1">Збір, аналіз та формалізація бізнес-вимог від Product Managers та інших стейкхолдерів.</li>
+            <li data-i18n="softsvit.li2">Постановка задач для команди розробки та підготовка структурованої документації.</li>
+            <li data-i18n="softsvit.li3">Опис функціональних та нефункціональних вимог, acceptance criteria та бізнес-логіки.</li>
+            <li data-i18n="softsvit.li4">Аналіз та проєктування нових функцій платформи: бонусні системи, premium subscription, cashback, anti-fraud механіки.</li>
+            <li data-i18n="softsvit.li5">Робота з REST API, GraphQL, CMS та Back Office системами.</li>
+            <li data-i18n="softsvit.li6">Участь в інтеграціях зовнішніх game/payment providers.</li>
+            <li data-i18n="softsvit.li7">Проведення кросфункціональних зустрічей між бізнесом, QA, developers та support-командами.</li>
+            <li data-i18n="softsvit.li8">Створення BPMN/UML/ERD схем та опис бізнес-процесів.</li>
+            <li data-i18n="softsvit.li9">Прототипування інтерфейсів та підготовка презентаційних матеріалів для бізнесу.</li>
+            <li data-i18n="softsvit.li10">Оптимізація процесу Storytelling шляхом створення стандартизованих шаблонів задач.</li>
+            <li data-i18n="softsvit.li11">Аналіз користувацьких сценаріїв та edge-case-ів для нових функцій.</li>
+            <li data-i18n="softsvit.li12">Участь у проєктах, пов’язаних із AI-рішеннями та автоматизацією внутрішніх процесів.</li>
+            <li data-i18n="softsvit.li13">Підтримка та розвиток корпоративної бази знань.</li>
+            <li data-i18n="softsvit.li14">Онбординг та менторинг нових Business Analyst-ів.</li>
+            <li data-i18n="softsvit.li15">Співпраця з кросфункціональними та кросмовними командами.</li>
+            <li data-i18n="softsvit.li16">Аналіз та опис інтеграцій REST/SOAP API.</li>
+            <li data-i18n="softsvit.li17">Робота з Jira, Atlassian Workspace, Swagger/Postman.</li>
           </ul>
         </article>
 
@@ -534,15 +627,15 @@
             <strong>Feb 2025 — Jun 2025</strong>
           </div>
           <ul>
-            <li>Збір і аналіз вимог щодо покращення програмного забезпечення від співробітників і клієнтів.</li>
-            <li>Low-code розробка workflow у Power Automate та Make.</li>
-            <li>Моделювання бізнес-процесів: BPMN 2.0, UML, ERD.</li>
-            <li>Проведення персональних інтерв’ю для збору функціональних і нефункціональних вимог.</li>
-            <li>Розробка MVP-додатків на базі PowerApps.</li>
-            <li>Автоматизація обробки корпоративних інструкцій для корпоративного чатбота.</li>
-            <li>Участь у процесах стратегічного планування компанії.</li>
-            <li>Написання інструкцій і документації до корпоративних процесів та ПЗ.</li>
-            <li>Досвід опису роботи з бухгалтерським і кадровим діловодством.</li>
+            <li data-i18n="eclectic.li1">Збір і аналіз вимог щодо покращення програмного забезпечення від співробітників і клієнтів.</li>
+            <li data-i18n="eclectic.li2">Low-code розробка workflow у Power Automate та Make.</li>
+            <li data-i18n="eclectic.li3">Моделювання бізнес-процесів: BPMN 2.0, UML, ERD.</li>
+            <li data-i18n="eclectic.li4">Проведення персональних інтерв’ю для збору функціональних і нефункціональних вимог.</li>
+            <li data-i18n="eclectic.li5">Розробка MVP-додатків на базі PowerApps.</li>
+            <li data-i18n="eclectic.li6">Автоматизація обробки корпоративних інструкцій для корпоративного чатбота.</li>
+            <li data-i18n="eclectic.li7">Участь у процесах стратегічного планування компанії.</li>
+            <li data-i18n="eclectic.li8">Написання інструкцій і документації до корпоративних процесів та ПЗ.</li>
+            <li data-i18n="eclectic.li9">Досвід опису роботи з бухгалтерським і кадровим діловодством.</li>
           </ul>
         </article>
 
@@ -555,16 +648,16 @@
             <strong>Sep 2023 — Jan 2025</strong>
           </div>
           <ul>
-            <li>Збір даних щодо покращення програмного забезпечення від співробітників і клієнтів.</li>
-            <li>Збір та аналіз даних за допомогою Python і SQL.</li>
-            <li>Створення дашбордів у PowerBI та Tableau.</li>
-            <li>Автоматизація звітів за допомогою NoCode, Python і JavaScript.</li>
-            <li>Переговори з аутсорсинговими командами.</li>
-            <li>Написання документації та створення логічних карт бізнес-процесів BPMN 2.0.</li>
-            <li>Робота з кросфункціональними та кросмовними командами.</li>
-            <li>Jira / Atlassian workspace.</li>
-            <li>Збір і аналіз вимог для проєктів інтеграції REST та SOAP API.</li>
-            <li>Документування функціональних і технічних вимог відповідно до бізнес-цілей.</li>
+            <li data-i18n="viyar.li1">Збір даних щодо покращення програмного забезпечення від співробітників і клієнтів.</li>
+            <li data-i18n="viyar.li2">Збір та аналіз даних за допомогою Python і SQL.</li>
+            <li data-i18n="viyar.li3">Створення дашбордів у PowerBI та Tableau.</li>
+            <li data-i18n="viyar.li4">Автоматизація звітів за допомогою NoCode, Python і JavaScript.</li>
+            <li data-i18n="viyar.li5">Переговори з аутсорсинговими командами.</li>
+            <li data-i18n="viyar.li6">Написання документації та створення логічних карт бізнес-процесів BPMN 2.0.</li>
+            <li data-i18n="viyar.li7">Робота з кросфункціональними та кросмовними командами.</li>
+            <li data-i18n="viyar.li8">Jira / Atlassian workspace.</li>
+            <li data-i18n="viyar.li9">Збір і аналіз вимог для проєктів інтеграції REST та SOAP API.</li>
+            <li data-i18n="viyar.li10">Документування функціональних і технічних вимог відповідно до бізнес-цілей.</li>
           </ul>
         </article>
       </div>
@@ -572,46 +665,46 @@
 
     <section id="projects">
       <div class="section-title">
-        <h2>Проєкти</h2>
-        <p>Приклади напрямів роботи, зазначені у CV.</p>
+        <h2 data-i18n="projects.title">Проєкти</h2>
+        <p data-i18n="projects.subtitle">Приклади напрямів роботи, зазначені у CV.</p>
       </div>
       <div class="projects">
         <article class="project-card">
-          <h3>Персональна статистика користувача</h3>
-          <p>Аналітика для створення персональної статистики та зрозумілого представлення активності користувача.</p>
+          <h3 data-i18n="projects.card1.title">Персональна статистика користувача</h3>
+          <p data-i18n="projects.card1.text">Аналітика для створення персональної статистики та зрозумілого представлення активності користувача.</p>
         </article>
         <article class="project-card">
           <h3>Anti-fraud filter</h3>
-          <p>Аналітика можливості антифрод-фільтру на основі meta-даних користувача.</p>
+          <p data-i18n="projects.card2.text">Аналітика можливості антифрод-фільтру на основі meta-даних користувача.</p>
         </article>
         <article class="project-card">
           <h3>AI rule-based agent</h3>
-          <p>Створення AI rule-based агента для оцінки діяльності Call Center.</p>
+          <p data-i18n="projects.card3.text">Створення AI rule-based агента для оцінки діяльності Call Center.</p>
         </article>
       </div>
     </section>
 
     <section id="skills">
       <div class="section-title">
-        <h2>Навички та інструменти</h2>
-        <p>Технології, методології та управлінські компетенції з CV.</p>
+        <h2 data-i18n="skills.title">Навички та інструменти</h2>
+        <p data-i18n="skills.subtitle">Технології, методології та управлінські компетенції з CV.</p>
       </div>
       <div class="skills">
         <article class="skill-card">
-          <h3>Аналіз та моделювання</h3>
+          <h3 data-i18n="skills.card1.title">Аналіз та моделювання</h3>
           <div class="tags">
             <span class="tag">Python</span>
             <span class="tag">SQL</span>
             <span class="tag">BPMN 2.0</span>
             <span class="tag">UML</span>
             <span class="tag">ERD</span>
-            <span class="tag">Functional requirements</span>
-            <span class="tag">Technical requirements</span>
+            <span class="tag" data-i18n="skills.tag.functional">Функціональні вимоги</span>
+            <span class="tag" data-i18n="skills.tag.technical">Технічні вимоги</span>
             <span class="tag">A/B testing</span>
           </div>
         </article>
         <article class="skill-card">
-          <h3>Tools</h3>
+          <h3 data-i18n="skills.card2.title">Інструменти</h3>
           <div class="tags">
             <span class="tag">JavaScript</span>
             <span class="tag">PowerBI</span>
@@ -629,15 +722,15 @@
           </div>
         </article>
         <article class="skill-card">
-          <h3>Management</h3>
+          <h3 data-i18n="skills.card3.title">Менеджмент</h3>
           <div class="tags">
-            <span class="tag">Documentation</span>
-            <span class="tag">Client management in CRM</span>
-            <span class="tag">Task monitoring</span>
-            <span class="tag">Conflict resolution</span>
-            <span class="tag">Intern training</span>
-            <span class="tag">AI tools implementation</span>
-            <span class="tag">Outsourcing negotiations</span>
+            <span class="tag" data-i18n="skills.tag.documentation">Документація</span>
+            <span class="tag" data-i18n="skills.tag.crm">Управління клієнтами в CRM</span>
+            <span class="tag" data-i18n="skills.tag.monitoring">Моніторинг задач</span>
+            <span class="tag" data-i18n="skills.tag.conflicts">Вирішення конфліктів</span>
+            <span class="tag" data-i18n="skills.tag.interns">Навчання інтернів</span>
+            <span class="tag" data-i18n="skills.tag.ai">Впровадження AI-інструментів</span>
+            <span class="tag" data-i18n="skills.tag.outsourcing">Переговори з аутсорсингом</span>
           </div>
         </article>
       </div>
@@ -645,19 +738,19 @@
 
     <section id="education">
       <div class="section-title">
-        <h2>Освіта та курси</h2>
-        <p>Академічна освіта та професійні курси.</p>
+        <h2 data-i18n="education.title">Освіта та курси</h2>
+        <p data-i18n="education.subtitle">Академічна освіта та професійні курси.</p>
       </div>
       <div class="grid-2">
         <article class="section-card">
-          <h3>Education</h3>
+          <h3 data-i18n="education.card1.title">Освіта</h3>
           <ul>
-            <li>2018–2022 · Uniwersytet Szczecinski, Poland · Translation DE-RU</li>
-            <li>2022–Now · DTEU, Ukraine · Marketing</li>
+            <li data-i18n="education.card1.li1">2018–2022 · Uniwersytet Szczecinski, Польща · Переклад DE-RU</li>
+            <li data-i18n="education.card1.li2">2022–дотепер · ДТЕУ, Україна · Маркетинг</li>
           </ul>
         </article>
         <article class="section-card">
-          <h3>University of Alberta · Courses</h3>
+          <h3 data-i18n="education.card2.title">University of Alberta · Курси</h3>
           <ul>
             <li>Client Needs and Software Requirements</li>
             <li>Software Processes and Agile Practices</li>
@@ -670,8 +763,8 @@
 
     <section id="contact" class="contact">
       <div class="contact-card">
-        <h2>Готовий до співпраці у ролі Business Analyst</h2>
-        <p>
+        <h2 data-i18n="contact.title">Готовий до співпраці у ролі Business Analyst</h2>
+        <p data-i18n="contact.text">
           Контакти для обговорення продуктового, аналітичного або автоматизаційного проєкту.
         </p>
         <div class="hero-actions">
@@ -680,9 +773,9 @@
         </div>
       </div>
       <div class="contact-card">
-        <h2>Контакти</h2>
+        <h2 data-i18n="contact.card.title">Контакти</h2>
         <div class="contact-links">
-          <span>Ukraine, Kyiv</span>
+          <span data-i18n="contact.location">Україна, Київ</span>
           <a href="tel:+380956806179">+380956806179</a>
           <a href="mailto:Yaroslavklimchukk@gmail.com">Yaroslavklimchukk@gmail.com</a>
         </div>
@@ -691,7 +784,250 @@
   </main>
 
   <footer>
-    <div class="page">© 2026 Yaroslav Klimchuk · Business Analyst</div>
+    <div class="page" data-i18n="footer">© 2026 Ярослав Климчук · Бізнес-аналітик</div>
   </footer>
+
+  <script>
+    const translations = {
+      ua: {
+        "nav.about": "Про мене",
+        "nav.experience": "Досвід",
+        "nav.projects": "Проєкти",
+        "nav.skills": "Навички",
+        "nav.contact": "Контакти",
+
+        "hero.badge": "Бізнес-аналітик · Київ, Україна",
+        "hero.text": "Бізнес-аналітик з досвідом збору та аналізу вимог, моделювання бізнес-процесів, прототипування інтерфейсів, роботи з даними, автоматизації звітності та впровадження стандартів документації для продуктових і бізнес-команд.",
+        "hero.email": "Написати на email",
+        "hero.call": "Подзвонити",
+
+        "quick.location.label": "Локація",
+        "quick.location.value": "Україна, Київ",
+        "quick.phone": "Телефон",
+
+        "profile.title": "25 років · Бізнес-аналітик",
+        "profile.text": "Поєдную бізнес-аналіз, data-driven підхід, low-code автоматизацію та сильне документування, щоб переводити бізнес-потреби у зрозумілі вимоги для розробки.",
+        "profile.item1": "• Функціональні та технічні вимоги",
+        "profile.item3": "• Аналіз інтеграцій REST / SOAP API",
+
+        "about.title": "Про мене",
+        "about.subtitle": "Короткий профіль на основі CV: фокус на бізнес-аналізі, автоматизації, документації та взаємодії зі стейкхолдерами.",
+        "about.card1.title": "Що роблю",
+        "about.card1.text": "Збираю та аналізую вимоги, проводжу інтерв’ю з командами, описую процеси, створюю прототипи інтерфейсів, готую документацію та супроводжую узгодження між бізнесом, продуктом і розробкою.",
+        "about.card2.title": "Сильні сторони",
+        "about.card2.text": "Досвід у кросфункціональних і кросмовних командах, переговори з аутсорсинговими командами, підтримка корпоративної бази знань, навчання інтернів та впровадження AI-інструментів у робочі процеси.",
+
+        "experience.title": "Досвід роботи",
+        "experience.subtitle": "Ключові ролі та результати у бізнес-аналізі, автоматизації, роботі з вимогами та документацією.",
+
+        "softsvit.stakeholders": "Основні стейкхолдери: Call center, Product Analysts, Product Managers",
+        "softsvit.li1": "Збір, аналіз та формалізація бізнес-вимог від Product Managers та інших стейкхолдерів.",
+        "softsvit.li2": "Постановка задач для команди розробки та підготовка структурованої документації.",
+        "softsvit.li3": "Опис функціональних та нефункціональних вимог, acceptance criteria та бізнес-логіки.",
+        "softsvit.li4": "Аналіз та проєктування нових функцій платформи: бонусні системи, premium subscription, cashback, anti-fraud механіки.",
+        "softsvit.li5": "Робота з REST API, GraphQL, CMS та Back Office системами.",
+        "softsvit.li6": "Участь в інтеграціях зовнішніх game/payment providers.",
+        "softsvit.li7": "Проведення кросфункціональних зустрічей між бізнесом, QA, developers та support-командами.",
+        "softsvit.li8": "Створення BPMN/UML/ERD схем та опис бізнес-процесів.",
+        "softsvit.li9": "Прототипування інтерфейсів та підготовка презентаційних матеріалів для бізнесу.",
+        "softsvit.li10": "Оптимізація процесу Storytelling шляхом створення стандартизованих шаблонів задач.",
+        "softsvit.li11": "Аналіз користувацьких сценаріїв та edge-case-ів для нових функцій.",
+        "softsvit.li12": "Участь у проєктах, пов’язаних із AI-рішеннями та автоматизацією внутрішніх процесів.",
+        "softsvit.li13": "Підтримка та розвиток корпоративної бази знань.",
+        "softsvit.li14": "Онбординг та менторинг нових Business Analyst-ів.",
+        "softsvit.li15": "Співпраця з кросфункціональними та кросмовними командами.",
+        "softsvit.li16": "Аналіз та опис інтеграцій REST/SOAP API.",
+        "softsvit.li17": "Робота з Jira, Atlassian Workspace, Swagger/Postman.",
+
+        "eclectic.li1": "Збір і аналіз вимог щодо покращення програмного забезпечення від співробітників і клієнтів.",
+        "eclectic.li2": "Low-code розробка workflow у Power Automate та Make.",
+        "eclectic.li3": "Моделювання бізнес-процесів: BPMN 2.0, UML, ERD.",
+        "eclectic.li4": "Проведення персональних інтерв’ю для збору функціональних і нефункціональних вимог.",
+        "eclectic.li5": "Розробка MVP-додатків на базі PowerApps.",
+        "eclectic.li6": "Автоматизація обробки корпоративних інструкцій для корпоративного чатбота.",
+        "eclectic.li7": "Участь у процесах стратегічного планування компанії.",
+        "eclectic.li8": "Написання інструкцій і документації до корпоративних процесів та ПЗ.",
+        "eclectic.li9": "Досвід опису роботи з бухгалтерським і кадровим діловодством.",
+
+        "viyar.li1": "Збір даних щодо покращення програмного забезпечення від співробітників і клієнтів.",
+        "viyar.li2": "Збір та аналіз даних за допомогою Python і SQL.",
+        "viyar.li3": "Створення дашбордів у PowerBI та Tableau.",
+        "viyar.li4": "Автоматизація звітів за допомогою NoCode, Python і JavaScript.",
+        "viyar.li5": "Переговори з аутсорсинговими командами.",
+        "viyar.li6": "Написання документації та створення логічних карт бізнес-процесів BPMN 2.0.",
+        "viyar.li7": "Робота з кросфункціональними та кросмовними командами.",
+        "viyar.li8": "Jira / Atlassian workspace.",
+        "viyar.li9": "Збір і аналіз вимог для проєктів інтеграції REST та SOAP API.",
+        "viyar.li10": "Документування функціональних і технічних вимог відповідно до бізнес-цілей.",
+
+        "projects.title": "Проєкти",
+        "projects.subtitle": "Приклади напрямів роботи, зазначені у CV.",
+        "projects.card1.title": "Персональна статистика користувача",
+        "projects.card1.text": "Аналітика для створення персональної статистики та зрозумілого представлення активності користувача.",
+        "projects.card2.text": "Аналітика можливості антифрод-фільтру на основі meta-даних користувача.",
+        "projects.card3.text": "Створення AI rule-based агента для оцінки діяльності Call Center.",
+
+        "skills.title": "Навички та інструменти",
+        "skills.subtitle": "Технології, методології та управлінські компетенції з CV.",
+        "skills.card1.title": "Аналіз та моделювання",
+        "skills.card2.title": "Інструменти",
+        "skills.card3.title": "Менеджмент",
+        "skills.tag.functional": "Функціональні вимоги",
+        "skills.tag.technical": "Технічні вимоги",
+        "skills.tag.documentation": "Документація",
+        "skills.tag.crm": "Управління клієнтами в CRM",
+        "skills.tag.monitoring": "Моніторинг задач",
+        "skills.tag.conflicts": "Вирішення конфліктів",
+        "skills.tag.interns": "Навчання інтернів",
+        "skills.tag.ai": "Впровадження AI-інструментів",
+        "skills.tag.outsourcing": "Переговори з аутсорсингом",
+
+        "education.title": "Освіта та курси",
+        "education.subtitle": "Академічна освіта та професійні курси.",
+        "education.card1.title": "Освіта",
+        "education.card1.li1": "2018–2022 · Uniwersytet Szczecinski, Польща · Переклад DE-RU",
+        "education.card1.li2": "2022–дотепер · ДТЕУ, Україна · Маркетинг",
+        "education.card2.title": "University of Alberta · Курси",
+
+        "contact.title": "Готовий до співпраці у ролі Business Analyst",
+        "contact.text": "Контакти для обговорення продуктового, аналітичного або автоматизаційного проєкту.",
+        "contact.card.title": "Контакти",
+        "contact.location": "Україна, Київ",
+        "footer": "© 2026 Ярослав Климчук · Бізнес-аналітик"
+      },
+
+      en: {
+        "nav.about": "About",
+        "nav.experience": "Experience",
+        "nav.projects": "Projects",
+        "nav.skills": "Skills",
+        "nav.contact": "Contact",
+
+        "hero.badge": "Business Analyst · Kyiv, Ukraine",
+        "hero.text": "Business Analyst experienced in requirements elicitation and analysis, business process modeling, interface prototyping, data work, reporting automation, and implementing documentation standards for product and business teams.",
+        "hero.email": "Email me",
+        "hero.call": "Call",
+
+        "quick.location.label": "Location",
+        "quick.location.value": "Ukraine, Kyiv",
+        "quick.phone": "Phone",
+
+        "profile.title": "25 y.o. · Business Analyst",
+        "profile.text": "I combine business analysis, a data-driven approach, low-code automation, and strong documentation to translate business needs into clear requirements for development.",
+        "profile.item1": "• Functional and technical requirements",
+        "profile.item3": "• REST / SOAP API integration analysis",
+
+        "about.title": "About",
+        "about.subtitle": "Short CV-based profile focused on business analysis, automation, documentation, and stakeholder collaboration.",
+        "about.card1.title": "What I do",
+        "about.card1.text": "I gather and analyze requirements, conduct interviews with teams, document processes, create interface prototypes, prepare documentation, and support alignment between business, product, and development teams.",
+        "about.card2.title": "Strengths",
+        "about.card2.text": "Experience in cross-functional and multilingual teams, negotiations with outsourcing teams, maintenance of corporate knowledge bases, intern training, and implementation of AI tools into work processes.",
+
+        "experience.title": "Work Experience",
+        "experience.subtitle": "Key roles and results in business analysis, automation, requirements management, and documentation.",
+
+        "softsvit.stakeholders": "Key stakeholders: Call Center, Product Analysts, Product Managers",
+        "softsvit.li1": "Gathered, analyzed, and formalized business requirements from Product Managers and other stakeholders.",
+        "softsvit.li2": "Created development tasks and prepared structured documentation.",
+        "softsvit.li3": "Documented functional and non-functional requirements, acceptance criteria, and business logic.",
+        "softsvit.li4": "Analyzed and designed new platform features: bonus systems, premium subscriptions, cashback, and anti-fraud mechanics.",
+        "softsvit.li5": "Worked with REST APIs, GraphQL, CMS, and Back Office systems.",
+        "softsvit.li6": "Participated in integrations with external game and payment providers.",
+        "softsvit.li7": "Conducted cross-functional meetings between business, QA, developers, and support teams.",
+        "softsvit.li8": "Created BPMN/UML/ERD diagrams and documented business processes.",
+        "softsvit.li9": "Prototyped interfaces and prepared presentation materials for business stakeholders.",
+        "softsvit.li10": "Optimized the Storytelling process by creating standardized task templates.",
+        "softsvit.li11": "Analyzed user scenarios and edge cases for new features.",
+        "softsvit.li12": "Participated in projects related to AI solutions and internal process automation.",
+        "softsvit.li13": "Maintained and developed the corporate knowledge base.",
+        "softsvit.li14": "Onboarded and mentored new Business Analysts.",
+        "softsvit.li15": "Collaborated with cross-functional and multilingual teams.",
+        "softsvit.li16": "Analyzed and documented REST/SOAP API integrations.",
+        "softsvit.li17": "Worked with Jira, Atlassian Workspace, Swagger, and Postman.",
+
+        "eclectic.li1": "Gathered and analyzed software improvement requirements from employees and clients.",
+        "eclectic.li2": "Developed low-code workflows in Power Automate and Make.",
+        "eclectic.li3": "Modeled business processes using BPMN 2.0, UML, and ERD.",
+        "eclectic.li4": "Conducted one-on-one interviews to gather functional and non-functional requirements.",
+        "eclectic.li5": "Developed MVP applications based on PowerApps.",
+        "eclectic.li6": "Automated processing of corporate instructions for an internal chatbot.",
+        "eclectic.li7": "Participated in the company’s strategic planning processes.",
+        "eclectic.li8": "Wrote instructions and documentation for corporate processes and software.",
+        "eclectic.li9": "Documented processes related to accounting and HR administration.",
+
+        "viyar.li1": "Collected data on software improvement needs from employees and clients.",
+        "viyar.li2": "Collected and analyzed data using Python and SQL.",
+        "viyar.li3": "Created dashboards in PowerBI and Tableau.",
+        "viyar.li4": "Automated reports using NoCode tools, Python, and JavaScript.",
+        "viyar.li5": "Negotiated with outsourcing teams.",
+        "viyar.li6": "Wrote documentation and created BPMN 2.0 business process maps.",
+        "viyar.li7": "Worked with cross-functional and multilingual teams.",
+        "viyar.li8": "Worked in Jira / Atlassian workspace.",
+        "viyar.li9": "Gathered and analyzed requirements for REST and SOAP API integration projects.",
+        "viyar.li10": "Documented functional and technical requirements aligned with business goals.",
+
+        "projects.title": "Projects",
+        "projects.subtitle": "Examples of work areas mentioned in the CV.",
+        "projects.card1.title": "Personal user statistics",
+        "projects.card1.text": "Analytics for creating personalized statistics and a clear representation of user activity.",
+        "projects.card2.text": "Analysis of an anti-fraud filter based on user metadata.",
+        "projects.card3.text": "Creation of an AI rule-based agent to evaluate Call Center performance.",
+
+        "skills.title": "Skills & Tools",
+        "skills.subtitle": "Technologies, methodologies, and management competencies from the CV.",
+        "skills.card1.title": "Analysis & Modeling",
+        "skills.card2.title": "Tools",
+        "skills.card3.title": "Management",
+        "skills.tag.functional": "Functional requirements",
+        "skills.tag.technical": "Technical requirements",
+        "skills.tag.documentation": "Documentation",
+        "skills.tag.crm": "Client management in CRM",
+        "skills.tag.monitoring": "Task monitoring",
+        "skills.tag.conflicts": "Conflict resolution",
+        "skills.tag.interns": "Intern training",
+        "skills.tag.ai": "AI tools implementation",
+        "skills.tag.outsourcing": "Outsourcing negotiations",
+
+        "education.title": "Education & Courses",
+        "education.subtitle": "Academic education and professional courses.",
+        "education.card1.title": "Education",
+        "education.card1.li1": "2018–2022 · Uniwersytet Szczecinski, Poland · DE-RU Translation",
+        "education.card1.li2": "2022–Present · DTEU, Ukraine · Marketing",
+        "education.card2.title": "University of Alberta · Courses",
+
+        "contact.title": "Open to collaboration as a Business Analyst",
+        "contact.text": "Contact information for discussing product, analytics, or automation projects.",
+        "contact.card.title": "Contact",
+        "contact.location": "Ukraine, Kyiv",
+        "footer": "© 2026 Yaroslav Klimchuk · Business Analyst"
+      }
+    };
+
+    function setLanguage(lang) {
+      const selected = translations[lang] ? lang : "ua";
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (translations[selected][key]) {
+          element.textContent = translations[selected][key];
+        }
+      });
+
+      document.querySelectorAll(".lang-switch button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === selected);
+      });
+
+      document.documentElement.lang = selected === "ua" ? "uk" : "en";
+      localStorage.setItem("siteLanguage", selected);
+    }
+
+    document.querySelectorAll(".lang-switch button").forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.lang));
+    });
+
+    const savedLanguage = localStorage.getItem("siteLanguage") || "ua";
+    setLanguage(savedLanguage);
+  </script>
 </body>
 </html>
