@@ -94,6 +94,24 @@
       color: #ffffff;
     }
 
+    .nav-cases-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      background: #2563eb;
+      color: #ffffff !important;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-cases-btn:hover {
+      background: #1d4ed8;
+      color: #ffffff !important;
+      transform: translateY(-1px);
+    }
+
     .lang-switch {
       display: flex;
       align-items: center;
@@ -502,6 +520,7 @@
 
       <div class="nav-right">
         <nav class="nav-links" aria-label="Основна навігація">
+          <a href="cases.html" class="nav-cases-btn" data-i18n="nav.cases">Кейси</a>
           <a href="#about" data-i18n="nav.about">Про мене</a>
           <a href="#experience" data-i18n="nav.experience">Досвід</a>
           <a href="#projects" data-i18n="nav.projects">Проєкти</a>
@@ -795,6 +814,7 @@
         "nav.projects": "Проєкти",
         "nav.skills": "Навички",
         "nav.contact": "Контакти",
+        "nav.cases": "Кейси",
 
         "hero.badge": "Бізнес-аналітик · Київ, Україна",
         "hero.text": "Бізнес-аналітик з досвідом збору та аналізу вимог, моделювання бізнес-процесів, прототипування інтерфейсів, роботи з даними, автоматизації звітності та впровадження стандартів документації для продуктових і бізнес-команд.",
@@ -902,6 +922,7 @@
         "nav.projects": "Projects",
         "nav.skills": "Skills",
         "nav.contact": "Contact",
+        "nav.cases": "Cases",
 
         "hero.badge": "Business Analyst · Kyiv, Ukraine",
         "hero.text": "Business Analyst experienced in requirements elicitation and analysis, business process modeling, interface prototyping, data work, reporting automation, and implementing documentation standards for product and business teams.",
