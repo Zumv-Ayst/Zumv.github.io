@@ -286,6 +286,7 @@
       overflow: hidden;
       display: block;
       padding: 8px;
+      cursor: zoom-in;
       transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
@@ -504,6 +505,27 @@
       background: #0b1120;
     }
 
+    .artifact-modal-frame {
+      min-height: min(680px, 72vh);
+      max-height: 76vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: #ffffff;
+    }
+
+    .artifact-modal-frame img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 76vh;
+      object-fit: contain;
+    }
+
     /* ── Footer ── */
     footer {
       border-top: 1px solid rgba(148, 163, 184, 0.18);
@@ -680,7 +702,7 @@
           <span class="case-tag">BPMN</span>
           <h3 data-i18n="cases.card5.title">Мультимодальне замовлення</h3>
           <p data-i18n="cases.card5.text">Приклад моделювання комплексного бізнес-процесу з кількома етапами та учасниками.</p>
-          <a class="artifact-preview artifact-preview--wide" href="assets/cases/multimodal-order-bpmn.png" target="_blank" rel="noopener" aria-label="Open original multimodal booking BPMN diagram">
+          <a class="artifact-preview artifact-preview--wide" href="assets/cases/multimodal-order-bpmn.png" target="_blank" rel="noopener" aria-label="Open original multimodal booking BPMN diagram" data-open-artifact>
             <img src="assets/cases/multimodal-order-bpmn.png" alt="Оригінальна BPMN-діаграма мультимодального замовлення з Confluence">
           </a>
         </article>
@@ -689,7 +711,7 @@
           <span class="case-tag">UML Sequence</span>
           <h3 data-i18n="cases.card6.title">Пошук рейсів через Partnerka, Seatka та Olympus</h3>
           <p data-i18n="cases.card6.text">Приклад опису взаємодії між сервісами під час пошуку та обробки даних.</p>
-          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/partnerka-seatka-olympus-search.jpg" target="_blank" rel="noopener" aria-label="Open original flight search sequence diagram">
+          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/partnerka-seatka-olympus-search.jpg" target="_blank" rel="noopener" aria-label="Open original flight search sequence diagram" data-open-artifact>
             <img src="assets/cases/partnerka-seatka-olympus-search.jpg" alt="Оригінальна sequence-діаграма пошуку рейсів через Partnerka, Seatka та Olympus">
           </a>
         </article>
@@ -698,7 +720,7 @@
           <span class="case-tag">UML Sequence</span>
           <h3 data-i18n="cases.card7.title">Взаємодія Seatka з консолідатором</h3>
           <p data-i18n="cases.card7.text">Приклад моделювання інтеграції між внутрішньою системою та зовнішнім постачальником.</p>
-          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/consolidator-sequence.png" target="_blank" rel="noopener" aria-label="Open original Seatka consolidator sequence diagram">
+          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/consolidator-sequence.png" target="_blank" rel="noopener" aria-label="Open original Seatka consolidator sequence diagram" data-open-artifact>
             <img src="assets/cases/consolidator-sequence.png" alt="Оригінальна sequence-діаграма взаємодії Seatka з консолідатором">
           </a>
         </article>
@@ -800,6 +822,18 @@
                 <path class="bpmn-arrow" d="M160 700 L160 722 L1110 722 L1110 694" marker-end="url(#bpmnArrowFull)"></path>
                 <text class="bpmn-condition" x="174" y="718">Already sent → skip</text>
               </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagram-modal" id="artifactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="artifactModalTitle">
+    <div class="diagram-modal-content">
+      <button class="diagram-close" type="button" data-close-artifact aria-label="Close diagram">×</button>
+      <div class="diagram-modal-header">
+        <h2 id="artifactModalTitle"></h2>
+      </div>
+      <div class="artifact-modal-frame">
+        <img id="artifactModalImage" alt="">
       </div>
     </div>
   </div>
@@ -940,6 +974,12 @@
     const bpmnModal = document.getElementById("bpmnModal");
     const openBpmnButton = document.querySelector("[data-open-bpmn]");
     const closeBpmnButton = document.querySelector("[data-close-bpmn]");
+    const artifactModal = document.getElementById("artifactModal");
+    const artifactModalTitle = document.getElementById("artifactModalTitle");
+    const artifactModalImage = document.getElementById("artifactModalImage");
+    const artifactOpenButtons = document.querySelectorAll("[data-open-artifact]");
+    const artifactCloseButton = document.querySelector("[data-close-artifact]");
+    let activeArtifactTrigger = null;
 
     function openBpmnModal() {
       if (!bpmnModal) return;
@@ -971,9 +1011,55 @@
       });
     }
 
+    function openArtifactModal(trigger) {
+      if (!artifactModal || !artifactModalTitle || !artifactModalImage) return;
+
+      const previewImage = trigger.querySelector("img");
+      const caseTitle = trigger.closest(".case-card")?.querySelector("h3");
+      if (!previewImage || !caseTitle) return;
+
+      activeArtifactTrigger = trigger;
+      artifactModalTitle.textContent = caseTitle.textContent;
+      artifactModalImage.src = trigger.href;
+      artifactModalImage.alt = previewImage.alt;
+      artifactModal.classList.add("open");
+      artifactModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      artifactCloseButton?.focus();
+    }
+
+    function closeArtifactModal() {
+      if (!artifactModal) return;
+      artifactModal.classList.remove("open");
+      artifactModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      activeArtifactTrigger?.focus();
+      activeArtifactTrigger = null;
+    }
+
+    artifactOpenButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        openArtifactModal(button);
+      });
+    });
+
+    artifactCloseButton?.addEventListener("click", closeArtifactModal);
+
+    if (artifactModal) {
+      artifactModal.addEventListener("click", (event) => {
+        if (event.target === artifactModal) {
+          closeArtifactModal();
+        }
+      });
+    }
+
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && bpmnModal && bpmnModal.classList.contains("open")) {
         closeBpmnModal();
+      }
+      if (event.key === "Escape" && artifactModal && artifactModal.classList.contains("open")) {
+        closeArtifactModal();
       }
     });
   </script>
