@@ -305,6 +305,10 @@
 
     .artifact-preview--wide { aspect-ratio: 16 / 5; }
     .artifact-preview--portrait { aspect-ratio: 4 / 5; }
+    .artifact-preview--mockup {
+      aspect-ratio: 1920 / 778;
+      cursor: pointer;
+    }
 
 
     /* ── BPMN diagram preview & fullscreen ── */
@@ -788,6 +792,15 @@
             <img src="assets/cases/consolidator-sequence.png" alt="Оригінальна sequence-діаграма взаємодії з консолідатором">
           </a>
         </article>
+
+        <article class="case-card">
+          <span class="case-tag">UI Mockup</span>
+          <h3 data-i18n="cases.card8.title">Мокап інтерфейсів</h3>
+          <p data-i18n="cases.card8.text">Приклад проєктування робочого простору для контролю задач, спринтів і стану проєктів.</p>
+          <a class="artifact-preview artifact-preview--mockup" href="https://www.figma.com/community/file/1676744287810541303" target="_blank" rel="noopener noreferrer" aria-label="Open interface mockup in Figma">
+            <img src="assets/cases/project-management-ui-mockup.png" alt="Мокап інтерфейсу управління проєктами">
+          </a>
+        </article>
       </div>
     </section>
   </main>
@@ -960,6 +973,8 @@
         "cases.card6.text": "Приклад опису взаємодії між сервісами під час пошуку та обробки даних.",
         "cases.card7.title": "Взаємодія з консолідатором",
         "cases.card7.text": "Приклад моделювання інтеграції між внутрішньою системою та зовнішнім постачальником.",
+        "cases.card8.title": "Мокап інтерфейсів",
+        "cases.card8.text": "Приклад проєктування робочого простору для контролю задач, спринтів і стану проєктів.",
         "cases.viewer.fit": "Умістити",
         "cases.viewer.original": "Відкрити оригінал",
 
@@ -1014,6 +1029,8 @@
         "cases.card6.text": "An example of describing service interactions during data search and processing.",
         "cases.card7.title": "Consolidator Integration",
         "cases.card7.text": "An example of modeling an integration between an internal system and an external provider.",
+        "cases.card8.title": "Interface Mockup",
+        "cases.card8.text": "An example of designing a workspace for tracking tasks, sprints, and project health.",
         "cases.viewer.fit": "Fit to screen",
         "cases.viewer.original": "Open original",
 
