@@ -661,17 +661,223 @@
       overflow: auto;
       border: 1px solid rgba(148, 163, 184, 0.2);
       border-radius: 18px;
-      background: #f8fafc;
+      background: #e8eef6;
+      scroll-behavior: smooth;
     }
 
     .document-modal-text {
-      padding: clamp(20px, 4vw, 42px);
+      width: min(980px, 100%);
+      margin: 0 auto;
+      padding: clamp(20px, 4vw, 44px);
       color: #1e293b;
       font-family: Inter, Arial, sans-serif;
       font-size: 15px;
-      line-height: 1.7;
-      white-space: pre-wrap;
+      line-height: 1.65;
       overflow-wrap: anywhere;
+    }
+
+    .document-loading,
+    .document-error {
+      padding: 32px;
+      border-radius: 16px;
+      background: #ffffff;
+      color: #475569;
+      text-align: center;
+    }
+
+    .document-error {
+      color: #b91c1c;
+    }
+
+    .document-toc {
+      margin-bottom: 28px;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .document-toc summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      color: #0f172a;
+      font-weight: 750;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .document-toc summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .document-toc summary::after {
+      content: "+";
+      color: #2563eb;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .document-toc[open] summary::after {
+      content: "−";
+    }
+
+    .document-toc-list {
+      display: grid;
+      gap: 5px;
+      padding: 4px 20px 20px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .document-toc-item {
+      padding-top: 7px;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    .document-toc-item--bp {
+      margin-top: 7px;
+      color: #1d4ed8;
+      font-weight: 750;
+    }
+
+    .document-toc-item--us {
+      padding-left: 18px;
+      font-size: 14px;
+    }
+
+    .document-bp-heading {
+      margin: 34px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #93c5fd;
+      color: #0f172a;
+      font-size: clamp(22px, 3vw, 28px);
+      line-height: 1.25;
+    }
+
+    .document-bp-heading:first-of-type {
+      margin-top: 0;
+    }
+
+    .document-us-section {
+      margin-bottom: 18px;
+      padding: clamp(18px, 3vw, 28px);
+      border: 1px solid #d7e0eb;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .document-us-heading {
+      margin-bottom: 16px;
+      color: #0f172a;
+      font-size: clamp(18px, 2.5vw, 22px);
+      line-height: 1.35;
+    }
+
+    .document-actor {
+      display: inline-flex;
+      gap: 7px;
+      margin-bottom: 16px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #075985;
+      font-size: 13px;
+    }
+
+    .document-actor strong {
+      font-weight: 800;
+    }
+
+    .document-info-block {
+      margin: 12px 0;
+      padding: 14px 16px;
+      border-left: 4px solid #60a5fa;
+      border-radius: 0 12px 12px 0;
+      background: #eff6ff;
+    }
+
+    .document-info-block--value {
+      border-left-color: #34d399;
+      background: #ecfdf5;
+    }
+
+    .document-info-label,
+    .document-ac-label {
+      display: block;
+      margin-bottom: 5px;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .document-ac-label {
+      margin: 24px 0 10px;
+      color: #1d4ed8;
+    }
+
+    .document-ac-block {
+      margin-top: 12px;
+      overflow: hidden;
+      border: 1px solid #dbe4ef;
+      border-radius: 14px;
+      background: #f8fafc;
+    }
+
+    .document-ac-title {
+      padding: 13px 16px;
+      border-bottom: 1px solid #dbe4ef;
+      background: #f1f5f9;
+      color: #1e293b;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .document-gwt-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 11px 16px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .document-ac-title + .document-gwt-row {
+      border-top: 0;
+    }
+
+    .document-gwt-keyword {
+      width: fit-content;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .document-gwt-keyword--given {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .document-gwt-keyword--when {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .document-gwt-keyword--then {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .document-paragraph {
+      margin: 10px 0;
+      color: #334155;
     }
 
     /* ── Footer ── */
@@ -698,6 +904,11 @@
 
       .nav-links {
         display: none;
+      }
+
+      .document-gwt-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
       }
     }
   </style>
@@ -1027,7 +1238,9 @@
         </div>
       </div>
       <div class="document-modal-frame" id="documentModalFrame">
-        <pre class="document-modal-text" id="documentModalText">Завантаження документа…</pre>
+        <div class="document-modal-text" id="documentModalText">
+          <p class="document-loading">Завантаження документа…</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1389,20 +1602,163 @@
       return translations[language]?.[key] || translations.ua[key] || "";
     }
 
+    function createDocumentElement(tagName, className, text) {
+      const element = document.createElement(tagName);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    }
+
+    function showDocumentStatus(className, translationKey) {
+      if (!documentModalText) return;
+      const status = createDocumentElement("p", className, getTranslation(translationKey));
+      documentModalText.replaceChildren(status);
+    }
+
+    function renderDocumentContent(sourceText) {
+      if (!documentModalText) return;
+
+      const lines = sourceText
+        .replace(/^\uFEFF/, "")
+        .replace(/\r\n?/g, "\n")
+        .split("\n")
+        .map((line) => line.trim());
+      const firstBusinessProcess = lines.find((line) => /^BP\.\d+/.test(line));
+      let businessProcessOccurrences = 0;
+      let bodyStartIndex = firstBusinessProcess ? lines.indexOf(firstBusinessProcess) : 0;
+
+      if (firstBusinessProcess) {
+        lines.forEach((line, index) => {
+          if (line === firstBusinessProcess) {
+            businessProcessOccurrences += 1;
+            if (businessProcessOccurrences === 2) {
+              bodyStartIndex = index;
+            }
+          }
+        });
+      }
+
+      const tocLines = lines
+        .slice(0, bodyStartIndex)
+        .filter((line) => /^(?:BP|US)\.\d+/.test(line));
+      const fragment = document.createDocumentFragment();
+
+      if (tocLines.length) {
+        const toc = createDocumentElement("details", "document-toc");
+        const summary = createDocumentElement("summary", "", "Зміст");
+        const tocList = createDocumentElement("div", "document-toc-list");
+
+        tocLines.forEach((line) => {
+          const itemClass = line.startsWith("BP.")
+            ? "document-toc-item document-toc-item--bp"
+            : "document-toc-item document-toc-item--us";
+          tocList.append(createDocumentElement("div", itemClass, line));
+        });
+
+        toc.append(summary, tocList);
+        fragment.append(toc);
+      }
+
+      let currentUserStory = null;
+      let currentAcceptanceCriterion = null;
+      let pendingInfoBlock = null;
+
+      lines.slice(bodyStartIndex).forEach((line) => {
+        if (!line || line === "Зміст") return;
+
+        if (/^BP\.\d+/.test(line)) {
+          currentUserStory = null;
+          currentAcceptanceCriterion = null;
+          pendingInfoBlock = null;
+          fragment.append(createDocumentElement("h3", "document-bp-heading", line));
+          return;
+        }
+
+        if (/^US\.\d+/.test(line)) {
+          currentUserStory = createDocumentElement("section", "document-us-section");
+          currentUserStory.append(createDocumentElement("h4", "document-us-heading", line));
+          fragment.append(currentUserStory);
+          currentAcceptanceCriterion = null;
+          pendingInfoBlock = null;
+          return;
+        }
+
+        const target = () => currentAcceptanceCriterion || currentUserStory || fragment;
+        const actorMatch = line.match(/^Актор:\s*(.*)$/);
+        if (actorMatch) {
+          const actor = createDocumentElement("div", "document-actor");
+          actor.append(
+            createDocumentElement("strong", "", "Актор:"),
+            createDocumentElement("span", "", actorMatch[1])
+          );
+          target().append(actor);
+          pendingInfoBlock = null;
+          return;
+        }
+
+        if (line === "User Story:" || line === "Цінність:") {
+          const modifier = line === "Цінність:" ? " document-info-block--value" : "";
+          pendingInfoBlock = createDocumentElement("div", `document-info-block${modifier}`);
+          pendingInfoBlock.append(createDocumentElement("strong", "document-info-label", line.replace(":", "")));
+          (currentUserStory || fragment).append(pendingInfoBlock);
+          currentAcceptanceCriterion = null;
+          return;
+        }
+
+        if (line === "Acceptance Criteria") {
+          (currentUserStory || fragment).append(createDocumentElement("div", "document-ac-label", line));
+          currentAcceptanceCriterion = null;
+          pendingInfoBlock = null;
+          return;
+        }
+
+        if (/^AC\.\d+/.test(line)) {
+          currentAcceptanceCriterion = createDocumentElement("section", "document-ac-block");
+          currentAcceptanceCriterion.append(createDocumentElement("h5", "document-ac-title", line));
+          (currentUserStory || fragment).append(currentAcceptanceCriterion);
+          pendingInfoBlock = null;
+          return;
+        }
+
+        const scenarioMatch = line.match(/^(Given|When|Then)\s+(.*)$/);
+        if (scenarioMatch) {
+          const keyword = scenarioMatch[1].toLowerCase();
+          const row = createDocumentElement("div", "document-gwt-row");
+          row.append(
+            createDocumentElement("span", `document-gwt-keyword document-gwt-keyword--${keyword}`, scenarioMatch[1]),
+            createDocumentElement("span", "", scenarioMatch[2])
+          );
+          target().append(row);
+          pendingInfoBlock = null;
+          return;
+        }
+
+        const paragraph = createDocumentElement("p", "document-paragraph", line);
+        if (pendingInfoBlock) {
+          pendingInfoBlock.append(paragraph);
+          pendingInfoBlock = null;
+        } else {
+          target().append(paragraph);
+        }
+      });
+
+      documentModalText.replaceChildren(fragment);
+    }
+
     async function loadDocumentContent() {
       if (!documentModalText || documentLoaded) return;
 
-      documentModalText.textContent = getTranslation("cases.card9.loading");
+      showDocumentStatus("document-loading", "cases.card9.loading");
       try {
         const response = await fetch("assets/cases/user-management-requirements.txt");
         if (!response.ok) {
           throw new Error(`Document request failed with status ${response.status}`);
         }
         const buffer = await response.arrayBuffer();
-        documentModalText.textContent = new TextDecoder("utf-8").decode(buffer);
+        renderDocumentContent(new TextDecoder("utf-8").decode(buffer));
         documentLoaded = true;
       } catch (error) {
-        documentModalText.textContent = getTranslation("cases.card9.error");
+        showDocumentStatus("document-error", "cases.card9.error");
       }
     }
 
