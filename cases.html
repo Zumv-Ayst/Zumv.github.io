@@ -310,6 +310,64 @@
       cursor: pointer;
     }
 
+    .document-case-card {
+      cursor: pointer;
+      outline: none;
+    }
+
+    .document-case-card:focus-visible {
+      border-color: rgba(96, 165, 250, 0.75);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.24);
+    }
+
+    .document-preview {
+      min-height: 190px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 24px;
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(30, 64, 175, 0.16), rgba(15, 23, 42, 0.72));
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .document-case-card:hover .document-preview {
+      border-color: rgba(96, 165, 250, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .document-preview-icon {
+      width: 66px;
+      height: 82px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(147, 197, 253, 0.4);
+      border-radius: 12px;
+      background: rgba(219, 234, 254, 0.12);
+      color: #bfdbfe;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .document-preview-copy {
+      display: grid;
+      gap: 6px;
+    }
+
+    .document-preview-copy strong {
+      color: #ffffff;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .document-preview-copy small {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
 
     /* ── BPMN diagram preview & fullscreen ── */
     .bpmn-preview-btn {
@@ -594,6 +652,28 @@
       pointer-events: none;
     }
 
+    .document-modal-content {
+      width: min(1180px, 96vw);
+    }
+
+    .document-modal-frame {
+      max-height: 72vh;
+      overflow: auto;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 18px;
+      background: #f8fafc;
+    }
+
+    .document-modal-text {
+      padding: clamp(20px, 4vw, 42px);
+      color: #1e293b;
+      font-family: Inter, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
     /* ── Footer ── */
     footer {
       border-top: 1px solid rgba(148, 163, 184, 0.18);
@@ -801,6 +881,19 @@
             <img src="assets/cases/project-management-ui-mockup.png" alt="Мокап інтерфейсу управління проєктами">
           </a>
         </article>
+
+        <article class="case-card document-case-card" data-open-document role="button" tabindex="0" aria-haspopup="dialog" aria-controls="documentModal">
+          <span class="case-tag">Requirements</span>
+          <h3 data-i18n="cases.card9.title">Специфікація керування користувачами</h3>
+          <p data-i18n="cases.card9.text">Приклад структурованої документації бізнес-процесів, User Stories та Acceptance Criteria.</p>
+          <div class="document-preview" aria-hidden="true">
+            <span class="document-preview-icon">DOC</span>
+            <span class="document-preview-copy">
+              <strong data-i18n="cases.card9.previewTitle">BP · User Stories · Acceptance Criteria</strong>
+              <small data-i18n="cases.card9.previewHint">Натисніть, щоб переглянути весь документ</small>
+            </span>
+          </div>
+        </article>
       </div>
     </section>
   </main>
@@ -924,6 +1017,21 @@
     </div>
   </div>
 
+  <div class="diagram-modal" id="documentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="documentModalTitle" aria-describedby="documentModalSubtitle">
+    <div class="diagram-modal-content document-modal-content">
+      <button class="diagram-close" type="button" data-close-document aria-label="Close document">×</button>
+      <div class="diagram-modal-header">
+        <div>
+          <h2 id="documentModalTitle" data-i18n="cases.card9.documentTitle">Специфікація керування користувачами</h2>
+          <p id="documentModalSubtitle" data-i18n="cases.card9.documentSubtitle">Приклад документації бізнес-процесів, користувацьких історій і критеріїв приймання.</p>
+        </div>
+      </div>
+      <div class="document-modal-frame" id="documentModalFrame">
+        <pre class="document-modal-text" id="documentModalText">Завантаження документа…</pre>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="page" data-i18n="footer">© 2026 Ярослав Климчук · Бізнес-аналітик</div>
   </footer>
@@ -975,6 +1083,14 @@
         "cases.card7.text": "Приклад моделювання інтеграції між внутрішньою системою та зовнішнім постачальником.",
         "cases.card8.title": "Мокап інтерфейсів",
         "cases.card8.text": "Приклад проєктування робочого простору для контролю задач, спринтів і стану проєктів.",
+        "cases.card9.title": "Специфікація керування користувачами",
+        "cases.card9.text": "Приклад структурованої документації бізнес-процесів, User Stories та Acceptance Criteria.",
+        "cases.card9.previewTitle": "BP · User Stories · Acceptance Criteria",
+        "cases.card9.previewHint": "Натисніть, щоб переглянути весь документ",
+        "cases.card9.documentTitle": "Специфікація керування користувачами",
+        "cases.card9.documentSubtitle": "Приклад документації бізнес-процесів, користувацьких історій і критеріїв приймання.",
+        "cases.card9.loading": "Завантаження документа…",
+        "cases.card9.error": "Не вдалося завантажити документ. Спробуйте ще раз.",
         "cases.viewer.fit": "Умістити",
         "cases.viewer.original": "Відкрити оригінал",
 
@@ -1031,6 +1147,14 @@
         "cases.card7.text": "An example of modeling an integration between an internal system and an external provider.",
         "cases.card8.title": "Interface Mockup",
         "cases.card8.text": "An example of designing a workspace for tracking tasks, sprints, and project health.",
+        "cases.card9.title": "User Management Specification",
+        "cases.card9.text": "An example of structured business process, User Story, and Acceptance Criteria documentation.",
+        "cases.card9.previewTitle": "BP · User Stories · Acceptance Criteria",
+        "cases.card9.previewHint": "Click to view the full document",
+        "cases.card9.documentTitle": "User Management Specification",
+        "cases.card9.documentSubtitle": "An example of business process, user story, and acceptance criteria documentation.",
+        "cases.card9.loading": "Loading document…",
+        "cases.card9.error": "The document could not be loaded. Please try again.",
         "cases.viewer.fit": "Fit to screen",
         "cases.viewer.original": "Open original",
 
@@ -1079,10 +1203,17 @@
     const artifactZoomOutButton = document.querySelector("[data-artifact-zoom-out]");
     const artifactZoomInButton = document.querySelector("[data-artifact-zoom-in]");
     const artifactZoomFitButton = document.querySelector("[data-artifact-zoom-fit]");
+    const documentModal = document.getElementById("documentModal");
+    const documentModalFrame = document.getElementById("documentModalFrame");
+    const documentModalText = document.getElementById("documentModalText");
+    const documentOpenCards = document.querySelectorAll("[data-open-document]");
+    const documentCloseButton = document.querySelector("[data-close-document]");
     let activeArtifactTrigger = null;
     let artifactFitScale = 1;
     let artifactScale = 1;
     let artifactPanStart = null;
+    let activeDocumentTrigger = null;
+    let documentLoaded = false;
 
     function openBpmnModal() {
       if (!bpmnModal) return;
@@ -1253,12 +1384,79 @@
       });
     }
 
+    function getTranslation(key) {
+      const language = localStorage.getItem("siteLanguage") || "ua";
+      return translations[language]?.[key] || translations.ua[key] || "";
+    }
+
+    async function loadDocumentContent() {
+      if (!documentModalText || documentLoaded) return;
+
+      documentModalText.textContent = getTranslation("cases.card9.loading");
+      try {
+        const response = await fetch("assets/cases/user-management-requirements.txt");
+        if (!response.ok) {
+          throw new Error(`Document request failed with status ${response.status}`);
+        }
+        const buffer = await response.arrayBuffer();
+        documentModalText.textContent = new TextDecoder("utf-8").decode(buffer);
+        documentLoaded = true;
+      } catch (error) {
+        documentModalText.textContent = getTranslation("cases.card9.error");
+      }
+    }
+
+    function openDocumentModal(trigger) {
+      if (!documentModal) return;
+      activeDocumentTrigger = trigger;
+      documentModal.classList.add("open");
+      documentModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      if (documentModalFrame) {
+        documentModalFrame.scrollTop = 0;
+      }
+      loadDocumentContent();
+      documentCloseButton?.focus();
+    }
+
+    function closeDocumentModal() {
+      if (!documentModal) return;
+      documentModal.classList.remove("open");
+      documentModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      activeDocumentTrigger?.focus();
+      activeDocumentTrigger = null;
+    }
+
+    documentOpenCards.forEach((card) => {
+      card.addEventListener("click", () => openDocumentModal(card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openDocumentModal(card);
+        }
+      });
+    });
+
+    documentCloseButton?.addEventListener("click", closeDocumentModal);
+
+    if (documentModal) {
+      documentModal.addEventListener("click", (event) => {
+        if (event.target === documentModal) {
+          closeDocumentModal();
+        }
+      });
+    }
+
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && bpmnModal && bpmnModal.classList.contains("open")) {
         closeBpmnModal();
       }
       if (event.key === "Escape" && artifactModal && artifactModal.classList.contains("open")) {
         closeArtifactModal();
+      }
+      if (event.key === "Escape" && documentModal && documentModal.classList.contains("open")) {
+        closeDocumentModal();
       }
     });
   </script>
