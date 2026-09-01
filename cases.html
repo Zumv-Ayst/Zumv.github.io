@@ -505,25 +505,89 @@
       background: #0b1120;
     }
 
-    .artifact-modal-frame {
-      min-height: min(680px, 72vh);
-      max-height: 76vh;
+    .artifact-modal-content {
+      width: min(1600px, 98vw);
+    }
+
+    .artifact-modal-content .diagram-modal-header {
+      flex-wrap: wrap;
+    }
+
+    .artifact-modal-toolbar {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .artifact-modal-toolbar button,
+    .artifact-modal-toolbar a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
+      padding: 7px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.9);
+      color: #e2e8f0;
+      font: inherit;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .artifact-modal-toolbar button:hover,
+    .artifact-modal-toolbar a:hover {
+      border-color: rgba(96, 165, 250, 0.65);
+      background: rgba(59, 130, 246, 0.16);
+    }
+
+    .artifact-modal-toolbar button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .artifact-zoom-value {
+      min-width: 54px;
+      color: #cbd5e1;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+
+    .artifact-modal-frame {
+      height: min(760px, 76vh);
       overflow: auto;
       border-radius: 18px;
       border: 1px solid rgba(148, 163, 184, 0.18);
       background: #ffffff;
+      cursor: grab;
+      overscroll-behavior: contain;
+    }
+
+    .artifact-modal-frame.is-dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .artifact-modal-canvas {
+      width: max-content;
+      min-width: 100%;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
     }
 
     .artifact-modal-frame img {
       display: block;
-      width: auto;
       height: auto;
-      max-width: 100%;
-      max-height: 76vh;
-      object-fit: contain;
+      max-width: none;
+      max-height: none;
+      flex: 0 0 auto;
+      pointer-events: none;
     }
 
     /* ── Footer ── */
@@ -709,19 +773,19 @@
 
         <article class="case-card">
           <span class="case-tag">UML Sequence</span>
-          <h3 data-i18n="cases.card6.title">Пошук рейсів через Partnerka, Seatka та Olympus</h3>
+          <h3 data-i18n="cases.card6.title">Пошук рейсів через партнерські сервіси</h3>
           <p data-i18n="cases.card6.text">Приклад опису взаємодії між сервісами під час пошуку та обробки даних.</p>
           <a class="artifact-preview artifact-preview--portrait" href="assets/cases/partnerka-seatka-olympus-search.jpg" target="_blank" rel="noopener" aria-label="Open original flight search sequence diagram" data-open-artifact>
-            <img src="assets/cases/partnerka-seatka-olympus-search.jpg" alt="Оригінальна sequence-діаграма пошуку рейсів через Partnerka, Seatka та Olympus">
+            <img src="assets/cases/partnerka-seatka-olympus-search.jpg" alt="Оригінальна sequence-діаграма пошуку рейсів через партнерські сервіси">
           </a>
         </article>
 
         <article class="case-card">
           <span class="case-tag">UML Sequence</span>
-          <h3 data-i18n="cases.card7.title">Взаємодія Seatka з консолідатором</h3>
+          <h3 data-i18n="cases.card7.title">Взаємодія з консолідатором</h3>
           <p data-i18n="cases.card7.text">Приклад моделювання інтеграції між внутрішньою системою та зовнішнім постачальником.</p>
-          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/consolidator-sequence.png" target="_blank" rel="noopener" aria-label="Open original Seatka consolidator sequence diagram" data-open-artifact>
-            <img src="assets/cases/consolidator-sequence.png" alt="Оригінальна sequence-діаграма взаємодії Seatka з консолідатором">
+          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/consolidator-sequence.png" target="_blank" rel="noopener" aria-label="Open original consolidator sequence diagram" data-open-artifact>
+            <img src="assets/cases/consolidator-sequence.png" alt="Оригінальна sequence-діаграма взаємодії з консолідатором">
           </a>
         </article>
       </div>
@@ -827,13 +891,22 @@
   </div>
 
   <div class="diagram-modal" id="artifactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="artifactModalTitle">
-    <div class="diagram-modal-content">
+    <div class="diagram-modal-content artifact-modal-content">
       <button class="diagram-close" type="button" data-close-artifact aria-label="Close diagram">×</button>
       <div class="diagram-modal-header">
         <h2 id="artifactModalTitle"></h2>
+        <div class="artifact-modal-toolbar" aria-label="Diagram zoom controls">
+          <button type="button" data-artifact-zoom-out aria-label="Zoom out">−</button>
+          <span class="artifact-zoom-value" id="artifactZoomValue" aria-live="polite">100%</span>
+          <button type="button" data-artifact-zoom-in aria-label="Zoom in">+</button>
+          <button type="button" data-artifact-zoom-fit data-i18n="cases.viewer.fit">Умістити</button>
+          <a id="artifactOriginalLink" href="#" target="_blank" rel="noopener" data-i18n="cases.viewer.original">Відкрити оригінал</a>
+        </div>
       </div>
-      <div class="artifact-modal-frame">
-        <img id="artifactModalImage" alt="">
+      <div class="artifact-modal-frame" id="artifactModalFrame" tabindex="0">
+        <div class="artifact-modal-canvas">
+          <img id="artifactModalImage" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -883,10 +956,12 @@
 
         "cases.card5.title": "Мультимодальне замовлення",
         "cases.card5.text": "Приклад моделювання комплексного бізнес-процесу з кількома етапами та учасниками.",
-        "cases.card6.title": "Пошук рейсів через Partnerka, Seatka та Olympus",
+        "cases.card6.title": "Пошук рейсів через партнерські сервіси",
         "cases.card6.text": "Приклад опису взаємодії між сервісами під час пошуку та обробки даних.",
-        "cases.card7.title": "Взаємодія Seatka з консолідатором",
+        "cases.card7.title": "Взаємодія з консолідатором",
         "cases.card7.text": "Приклад моделювання інтеграції між внутрішньою системою та зовнішнім постачальником.",
+        "cases.viewer.fit": "Умістити",
+        "cases.viewer.original": "Відкрити оригінал",
 
         "cases.soon": "Більше кейсів незабаром",
         "footer": "© 2026 Ярослав Климчук · Бізнес-аналітик"
@@ -935,10 +1010,12 @@
 
         "cases.card5.title": "Multimodal Booking",
         "cases.card5.text": "An example of modeling a complex business process involving multiple stages and participants.",
-        "cases.card6.title": "Trip Search via Partnerka, Seatka and Olympus",
+        "cases.card6.title": "Trip Search via Partner Services",
         "cases.card6.text": "An example of describing service interactions during data search and processing.",
-        "cases.card7.title": "Seatka–Consolidator Interaction",
+        "cases.card7.title": "Consolidator Integration",
         "cases.card7.text": "An example of modeling an integration between an internal system and an external provider.",
+        "cases.viewer.fit": "Fit to screen",
+        "cases.viewer.original": "Open original",
 
         "cases.soon": "More cases coming soon",
         "footer": "© 2026 Yaroslav Klimchuk · Business Analyst"
@@ -977,9 +1054,18 @@
     const artifactModal = document.getElementById("artifactModal");
     const artifactModalTitle = document.getElementById("artifactModalTitle");
     const artifactModalImage = document.getElementById("artifactModalImage");
+    const artifactModalFrame = document.getElementById("artifactModalFrame");
+    const artifactZoomValue = document.getElementById("artifactZoomValue");
+    const artifactOriginalLink = document.getElementById("artifactOriginalLink");
     const artifactOpenButtons = document.querySelectorAll("[data-open-artifact]");
     const artifactCloseButton = document.querySelector("[data-close-artifact]");
+    const artifactZoomOutButton = document.querySelector("[data-artifact-zoom-out]");
+    const artifactZoomInButton = document.querySelector("[data-artifact-zoom-in]");
+    const artifactZoomFitButton = document.querySelector("[data-artifact-zoom-fit]");
     let activeArtifactTrigger = null;
+    let artifactFitScale = 1;
+    let artifactScale = 1;
+    let artifactPanStart = null;
 
     function openBpmnModal() {
       if (!bpmnModal) return;
@@ -1011,8 +1097,64 @@
       });
     }
 
+    function updateArtifactZoom(nextScale, preserveCenter = true) {
+      if (!artifactModalImage?.naturalWidth || !artifactModalFrame) return;
+
+      const centerX = (artifactModalFrame.scrollLeft + artifactModalFrame.clientWidth / 2) / artifactModalFrame.scrollWidth;
+      const centerY = (artifactModalFrame.scrollTop + artifactModalFrame.clientHeight / 2) / artifactModalFrame.scrollHeight;
+      artifactScale = Math.min(2, Math.max(artifactFitScale, nextScale));
+      artifactModalImage.style.width = `${Math.round(artifactModalImage.naturalWidth * artifactScale)}px`;
+
+      if (artifactZoomValue) {
+        artifactZoomValue.textContent = `${Math.round(artifactScale * 100)}%`;
+      }
+      if (artifactZoomOutButton) {
+        artifactZoomOutButton.disabled = artifactScale <= artifactFitScale + 0.001;
+      }
+      if (artifactZoomInButton) {
+        artifactZoomInButton.disabled = artifactScale >= 1.999;
+      }
+
+      requestAnimationFrame(() => {
+        if (preserveCenter) {
+          artifactModalFrame.scrollLeft = centerX * artifactModalFrame.scrollWidth - artifactModalFrame.clientWidth / 2;
+          artifactModalFrame.scrollTop = centerY * artifactModalFrame.scrollHeight - artifactModalFrame.clientHeight / 2;
+        } else {
+          artifactModalFrame.scrollLeft = 0;
+          artifactModalFrame.scrollTop = 0;
+        }
+      });
+    }
+
+    function calculateArtifactFitScale() {
+      if (!artifactModalImage?.naturalWidth || !artifactModalFrame) return;
+
+      const availableWidth = Math.max(1, artifactModalFrame.clientWidth - 32);
+      const availableHeight = Math.max(1, artifactModalFrame.clientHeight - 32);
+      artifactFitScale = Math.min(
+        availableWidth / artifactModalImage.naturalWidth,
+        availableHeight / artifactModalImage.naturalHeight,
+        1
+      );
+    }
+
+    function fitArtifactToFrame() {
+      calculateArtifactFitScale();
+      updateArtifactZoom(artifactFitScale, false);
+    }
+
+    function initializeArtifactViewer() {
+      calculateArtifactFitScale();
+      updateArtifactZoom(Math.max(artifactFitScale, 0.5), false);
+    }
+
+    function changeArtifactZoom(direction) {
+      const step = Math.max(artifactFitScale * 0.5, 0.1);
+      updateArtifactZoom(artifactScale + direction * step);
+    }
+
     function openArtifactModal(trigger) {
-      if (!artifactModal || !artifactModalTitle || !artifactModalImage) return;
+      if (!artifactModal || !artifactModalTitle || !artifactModalImage || !artifactOriginalLink) return;
 
       const previewImage = trigger.querySelector("img");
       const caseTitle = trigger.closest(".case-card")?.querySelector("h3");
@@ -1020,11 +1162,15 @@
 
       activeArtifactTrigger = trigger;
       artifactModalTitle.textContent = caseTitle.textContent;
-      artifactModalImage.src = trigger.href;
       artifactModalImage.alt = previewImage.alt;
+      artifactOriginalLink.href = trigger.href;
       artifactModal.classList.add("open");
       artifactModal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
+      artifactModalImage.src = trigger.href;
+      if (artifactModalImage.complete) {
+        requestAnimationFrame(initializeArtifactViewer);
+      }
       artifactCloseButton?.focus();
     }
 
@@ -1045,6 +1191,42 @@
     });
 
     artifactCloseButton?.addEventListener("click", closeArtifactModal);
+    artifactModalImage?.addEventListener("load", initializeArtifactViewer);
+    artifactZoomOutButton?.addEventListener("click", () => changeArtifactZoom(-1));
+    artifactZoomInButton?.addEventListener("click", () => changeArtifactZoom(1));
+    artifactZoomFitButton?.addEventListener("click", fitArtifactToFrame);
+
+    artifactModalFrame?.addEventListener("dblclick", () => changeArtifactZoom(1));
+
+    artifactModalFrame?.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      artifactPanStart = {
+        x: event.clientX,
+        y: event.clientY,
+        left: artifactModalFrame.scrollLeft,
+        top: artifactModalFrame.scrollTop
+      };
+      artifactModalFrame.classList.add("is-dragging");
+      artifactModalFrame.setPointerCapture(event.pointerId);
+    });
+
+    artifactModalFrame?.addEventListener("pointermove", (event) => {
+      if (!artifactPanStart) return;
+      artifactModalFrame.scrollLeft = artifactPanStart.left - (event.clientX - artifactPanStart.x);
+      artifactModalFrame.scrollTop = artifactPanStart.top - (event.clientY - artifactPanStart.y);
+    });
+
+    function stopArtifactPan(event) {
+      if (!artifactModalFrame || !artifactPanStart) return;
+      artifactPanStart = null;
+      artifactModalFrame.classList.remove("is-dragging");
+      if (artifactModalFrame.hasPointerCapture(event.pointerId)) {
+        artifactModalFrame.releasePointerCapture(event.pointerId);
+      }
+    }
+
+    artifactModalFrame?.addEventListener("pointerup", stopArtifactPan);
+    artifactModalFrame?.addEventListener("pointercancel", stopArtifactPan);
 
     if (artifactModal) {
       artifactModal.addEventListener("click", (event) => {
