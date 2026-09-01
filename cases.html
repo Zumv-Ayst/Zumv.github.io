@@ -277,6 +277,97 @@
       margin-bottom: 12px;
     }
 
+    .artifact-preview {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      border-radius: 16px;
+      background: #ffffff;
+      overflow: hidden;
+      display: block;
+      padding: 8px;
+      cursor: zoom-in;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .artifact-preview:hover {
+      border-color: rgba(96, 165, 250, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .artifact-preview img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .artifact-preview--wide { aspect-ratio: 16 / 5; }
+    .artifact-preview--portrait { aspect-ratio: 4 / 5; }
+    .artifact-preview--mockup {
+      aspect-ratio: 1920 / 778;
+      cursor: pointer;
+    }
+
+    .document-case-card {
+      cursor: pointer;
+      outline: none;
+    }
+
+    .document-case-card:focus-visible {
+      border-color: rgba(96, 165, 250, 0.75);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.24);
+    }
+
+    .document-preview {
+      min-height: 190px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 24px;
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(30, 64, 175, 0.16), rgba(15, 23, 42, 0.72));
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .document-case-card:hover .document-preview {
+      border-color: rgba(96, 165, 250, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .document-preview-icon {
+      width: 66px;
+      height: 82px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(147, 197, 253, 0.4);
+      border-radius: 12px;
+      background: rgba(219, 234, 254, 0.12);
+      color: #bfdbfe;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .document-preview-copy {
+      display: grid;
+      gap: 6px;
+    }
+
+    .document-preview-copy strong {
+      color: #ffffff;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .document-preview-copy small {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
 
     /* ── BPMN diagram preview & fullscreen ── */
     .bpmn-preview-btn {
@@ -476,6 +567,113 @@
       background: #0b1120;
     }
 
+    .artifact-modal-content {
+      width: min(1600px, 98vw);
+    }
+
+    .artifact-modal-content .diagram-modal-header {
+      flex-wrap: wrap;
+    }
+
+    .artifact-modal-toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .artifact-modal-toolbar button,
+    .artifact-modal-toolbar a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.9);
+      color: #e2e8f0;
+      font: inherit;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .artifact-modal-toolbar button:hover,
+    .artifact-modal-toolbar a:hover {
+      border-color: rgba(96, 165, 250, 0.65);
+      background: rgba(59, 130, 246, 0.16);
+    }
+
+    .artifact-modal-toolbar button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .artifact-zoom-value {
+      min-width: 54px;
+      color: #cbd5e1;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+
+    .artifact-modal-frame {
+      height: min(760px, 76vh);
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: #ffffff;
+      cursor: grab;
+      overscroll-behavior: contain;
+    }
+
+    .artifact-modal-frame.is-dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .artifact-modal-canvas {
+      width: max-content;
+      min-width: 100%;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .artifact-modal-frame img {
+      display: block;
+      height: auto;
+      max-width: none;
+      max-height: none;
+      flex: 0 0 auto;
+      pointer-events: none;
+    }
+
+    .document-modal-content {
+      width: min(1180px, 96vw);
+    }
+
+    .document-modal-frame {
+      max-height: 72vh;
+      overflow: auto;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 18px;
+      background: #f8fafc;
+    }
+
+    .document-modal-text {
+      padding: clamp(20px, 4vw, 42px);
+      color: #1e293b;
+      font-family: Inter, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
     /* ── Footer ── */
     footer {
       border-top: 1px solid rgba(148, 163, 184, 0.18);
@@ -648,16 +846,54 @@
           <div class="case-meta" data-i18n="cases.card4.meta">SoftSvit · 2025</div>
         </article>
 
-        <!-- Placeholder -->
-        <div class="coming-soon">
-          <span>🔜</span>
-          <span data-i18n="cases.soon">Більше кейсів незабаром</span>
-        </div>
+        <article class="case-card">
+          <span class="case-tag">BPMN</span>
+          <h3 data-i18n="cases.card5.title">Мультимодальне замовлення</h3>
+          <p data-i18n="cases.card5.text">Приклад моделювання комплексного бізнес-процесу з кількома етапами та учасниками.</p>
+          <a class="artifact-preview artifact-preview--wide" href="assets/cases/multimodal-order-bpmn.png" target="_blank" rel="noopener" aria-label="Open original multimodal booking BPMN diagram" data-open-artifact>
+            <img src="assets/cases/multimodal-order-bpmn.png" alt="Оригінальна BPMN-діаграма мультимодального замовлення з Confluence">
+          </a>
+        </article>
 
-        <div class="coming-soon">
-          <span>🔜</span>
-          <span data-i18n="cases.soon">Більше кейсів незабаром</span>
-        </div>
+        <article class="case-card">
+          <span class="case-tag">UML Sequence</span>
+          <h3 data-i18n="cases.card6.title">Пошук рейсів через партнерські сервіси</h3>
+          <p data-i18n="cases.card6.text">Приклад опису взаємодії між сервісами під час пошуку та обробки даних.</p>
+          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/partnerka-seatka-olympus-search.jpg" target="_blank" rel="noopener" aria-label="Open original flight search sequence diagram" data-open-artifact>
+            <img src="assets/cases/partnerka-seatka-olympus-search.jpg" alt="Оригінальна sequence-діаграма пошуку рейсів через партнерські сервіси">
+          </a>
+        </article>
+
+        <article class="case-card">
+          <span class="case-tag">UML Sequence</span>
+          <h3 data-i18n="cases.card7.title">Взаємодія з консолідатором</h3>
+          <p data-i18n="cases.card7.text">Приклад моделювання інтеграції між внутрішньою системою та зовнішнім постачальником.</p>
+          <a class="artifact-preview artifact-preview--portrait" href="assets/cases/consolidator-sequence.png" target="_blank" rel="noopener" aria-label="Open original consolidator sequence diagram" data-open-artifact>
+            <img src="assets/cases/consolidator-sequence.png" alt="Оригінальна sequence-діаграма взаємодії з консолідатором">
+          </a>
+        </article>
+
+        <article class="case-card">
+          <span class="case-tag">UI Mockup</span>
+          <h3 data-i18n="cases.card8.title">Мокап інтерфейсів</h3>
+          <p data-i18n="cases.card8.text">Приклад проєктування робочого простору для контролю задач, спринтів і стану проєктів.</p>
+          <a class="artifact-preview artifact-preview--mockup" href="https://www.figma.com/community/file/1676744287810541303" target="_blank" rel="noopener noreferrer" aria-label="Open interface mockup in Figma">
+            <img src="assets/cases/project-management-ui-mockup.png" alt="Мокап інтерфейсу управління проєктами">
+          </a>
+        </article>
+
+        <article class="case-card document-case-card" data-open-document role="button" tabindex="0" aria-haspopup="dialog" aria-controls="documentModal">
+          <span class="case-tag">Requirements</span>
+          <h3 data-i18n="cases.card9.title">Специфікація керування користувачами</h3>
+          <p data-i18n="cases.card9.text">Приклад структурованої документації бізнес-процесів, User Stories та Acceptance Criteria.</p>
+          <div class="document-preview" aria-hidden="true">
+            <span class="document-preview-icon">DOC</span>
+            <span class="document-preview-copy">
+              <strong data-i18n="cases.card9.previewTitle">BP · User Stories · Acceptance Criteria</strong>
+              <small data-i18n="cases.card9.previewHint">Натисніть, щоб переглянути весь документ</small>
+            </span>
+          </div>
+        </article>
       </div>
     </section>
   </main>
@@ -760,6 +996,42 @@
     </div>
   </div>
 
+  <div class="diagram-modal" id="artifactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="artifactModalTitle">
+    <div class="diagram-modal-content artifact-modal-content">
+      <button class="diagram-close" type="button" data-close-artifact aria-label="Close diagram">×</button>
+      <div class="diagram-modal-header">
+        <h2 id="artifactModalTitle"></h2>
+        <div class="artifact-modal-toolbar" aria-label="Diagram zoom controls">
+          <button type="button" data-artifact-zoom-out aria-label="Zoom out">−</button>
+          <span class="artifact-zoom-value" id="artifactZoomValue" aria-live="polite">100%</span>
+          <button type="button" data-artifact-zoom-in aria-label="Zoom in">+</button>
+          <button type="button" data-artifact-zoom-fit data-i18n="cases.viewer.fit">Умістити</button>
+          <a id="artifactOriginalLink" href="#" target="_blank" rel="noopener" data-i18n="cases.viewer.original">Відкрити оригінал</a>
+        </div>
+      </div>
+      <div class="artifact-modal-frame" id="artifactModalFrame" tabindex="0">
+        <div class="artifact-modal-canvas">
+          <img id="artifactModalImage" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagram-modal" id="documentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="documentModalTitle" aria-describedby="documentModalSubtitle">
+    <div class="diagram-modal-content document-modal-content">
+      <button class="diagram-close" type="button" data-close-document aria-label="Close document">×</button>
+      <div class="diagram-modal-header">
+        <div>
+          <h2 id="documentModalTitle" data-i18n="cases.card9.documentTitle">Специфікація керування користувачами</h2>
+          <p id="documentModalSubtitle" data-i18n="cases.card9.documentSubtitle">Приклад документації бізнес-процесів, користувацьких історій і критеріїв приймання.</p>
+        </div>
+      </div>
+      <div class="document-modal-frame" id="documentModalFrame">
+        <pre class="document-modal-text" id="documentModalText">Завантаження документа…</pre>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="page" data-i18n="footer">© 2026 Ярослав Климчук · Бізнес-аналітик</div>
   </footer>
@@ -802,6 +1074,25 @@
         "cases.card4.preview": "Натисніть, щоб відкрити BPMN на весь екран",
         "cases.card4.diagramTitle": "PSP Ticket Anomaly Alert — BPMN",
         "cases.card4.diagramSubtitle": "Автоматична перевірка попередньої години кожні 30 хвилин, поріг >15 New tickets і повідомлення в Google Chat.",
+
+        "cases.card5.title": "Мультимодальне замовлення",
+        "cases.card5.text": "Приклад моделювання комплексного бізнес-процесу з кількома етапами та учасниками.",
+        "cases.card6.title": "Пошук рейсів через партнерські сервіси",
+        "cases.card6.text": "Приклад опису взаємодії між сервісами під час пошуку та обробки даних.",
+        "cases.card7.title": "Взаємодія з консолідатором",
+        "cases.card7.text": "Приклад моделювання інтеграції між внутрішньою системою та зовнішнім постачальником.",
+        "cases.card8.title": "Мокап інтерфейсів",
+        "cases.card8.text": "Приклад проєктування робочого простору для контролю задач, спринтів і стану проєктів.",
+        "cases.card9.title": "Специфікація керування користувачами",
+        "cases.card9.text": "Приклад структурованої документації бізнес-процесів, User Stories та Acceptance Criteria.",
+        "cases.card9.previewTitle": "BP · User Stories · Acceptance Criteria",
+        "cases.card9.previewHint": "Натисніть, щоб переглянути весь документ",
+        "cases.card9.documentTitle": "Специфікація керування користувачами",
+        "cases.card9.documentSubtitle": "Приклад документації бізнес-процесів, користувацьких історій і критеріїв приймання.",
+        "cases.card9.loading": "Завантаження документа…",
+        "cases.card9.error": "Не вдалося завантажити документ. Спробуйте ще раз.",
+        "cases.viewer.fit": "Умістити",
+        "cases.viewer.original": "Відкрити оригінал",
 
         "cases.soon": "Більше кейсів незабаром",
         "footer": "© 2026 Ярослав Климчук · Бізнес-аналітик"
@@ -848,6 +1139,25 @@
         "cases.card4.diagramTitle": "PSP Ticket Anomaly Alert — BPMN",
         "cases.card4.diagramSubtitle": "Automatic previous-hour monitoring every 30 minutes, >15 New tickets threshold, and Google Chat notification.",
 
+        "cases.card5.title": "Multimodal Booking",
+        "cases.card5.text": "An example of modeling a complex business process involving multiple stages and participants.",
+        "cases.card6.title": "Trip Search via Partner Services",
+        "cases.card6.text": "An example of describing service interactions during data search and processing.",
+        "cases.card7.title": "Consolidator Integration",
+        "cases.card7.text": "An example of modeling an integration between an internal system and an external provider.",
+        "cases.card8.title": "Interface Mockup",
+        "cases.card8.text": "An example of designing a workspace for tracking tasks, sprints, and project health.",
+        "cases.card9.title": "User Management Specification",
+        "cases.card9.text": "An example of structured business process, User Story, and Acceptance Criteria documentation.",
+        "cases.card9.previewTitle": "BP · User Stories · Acceptance Criteria",
+        "cases.card9.previewHint": "Click to view the full document",
+        "cases.card9.documentTitle": "User Management Specification",
+        "cases.card9.documentSubtitle": "An example of business process, user story, and acceptance criteria documentation.",
+        "cases.card9.loading": "Loading document…",
+        "cases.card9.error": "The document could not be loaded. Please try again.",
+        "cases.viewer.fit": "Fit to screen",
+        "cases.viewer.original": "Open original",
+
         "cases.soon": "More cases coming soon",
         "footer": "© 2026 Yaroslav Klimchuk · Business Analyst"
       }
@@ -882,6 +1192,28 @@
     const bpmnModal = document.getElementById("bpmnModal");
     const openBpmnButton = document.querySelector("[data-open-bpmn]");
     const closeBpmnButton = document.querySelector("[data-close-bpmn]");
+    const artifactModal = document.getElementById("artifactModal");
+    const artifactModalTitle = document.getElementById("artifactModalTitle");
+    const artifactModalImage = document.getElementById("artifactModalImage");
+    const artifactModalFrame = document.getElementById("artifactModalFrame");
+    const artifactZoomValue = document.getElementById("artifactZoomValue");
+    const artifactOriginalLink = document.getElementById("artifactOriginalLink");
+    const artifactOpenButtons = document.querySelectorAll("[data-open-artifact]");
+    const artifactCloseButton = document.querySelector("[data-close-artifact]");
+    const artifactZoomOutButton = document.querySelector("[data-artifact-zoom-out]");
+    const artifactZoomInButton = document.querySelector("[data-artifact-zoom-in]");
+    const artifactZoomFitButton = document.querySelector("[data-artifact-zoom-fit]");
+    const documentModal = document.getElementById("documentModal");
+    const documentModalFrame = document.getElementById("documentModalFrame");
+    const documentModalText = document.getElementById("documentModalText");
+    const documentOpenCards = document.querySelectorAll("[data-open-document]");
+    const documentCloseButton = document.querySelector("[data-close-document]");
+    let activeArtifactTrigger = null;
+    let artifactFitScale = 1;
+    let artifactScale = 1;
+    let artifactPanStart = null;
+    let activeDocumentTrigger = null;
+    let documentLoaded = false;
 
     function openBpmnModal() {
       if (!bpmnModal) return;
@@ -913,9 +1245,218 @@
       });
     }
 
+    function updateArtifactZoom(nextScale, preserveCenter = true) {
+      if (!artifactModalImage?.naturalWidth || !artifactModalFrame) return;
+
+      const centerX = (artifactModalFrame.scrollLeft + artifactModalFrame.clientWidth / 2) / artifactModalFrame.scrollWidth;
+      const centerY = (artifactModalFrame.scrollTop + artifactModalFrame.clientHeight / 2) / artifactModalFrame.scrollHeight;
+      artifactScale = Math.min(2, Math.max(artifactFitScale, nextScale));
+      artifactModalImage.style.width = `${Math.round(artifactModalImage.naturalWidth * artifactScale)}px`;
+
+      if (artifactZoomValue) {
+        artifactZoomValue.textContent = `${Math.round(artifactScale * 100)}%`;
+      }
+      if (artifactZoomOutButton) {
+        artifactZoomOutButton.disabled = artifactScale <= artifactFitScale + 0.001;
+      }
+      if (artifactZoomInButton) {
+        artifactZoomInButton.disabled = artifactScale >= 1.999;
+      }
+
+      requestAnimationFrame(() => {
+        if (preserveCenter) {
+          artifactModalFrame.scrollLeft = centerX * artifactModalFrame.scrollWidth - artifactModalFrame.clientWidth / 2;
+          artifactModalFrame.scrollTop = centerY * artifactModalFrame.scrollHeight - artifactModalFrame.clientHeight / 2;
+        } else {
+          artifactModalFrame.scrollLeft = 0;
+          artifactModalFrame.scrollTop = 0;
+        }
+      });
+    }
+
+    function calculateArtifactFitScale() {
+      if (!artifactModalImage?.naturalWidth || !artifactModalFrame) return;
+
+      const availableWidth = Math.max(1, artifactModalFrame.clientWidth - 32);
+      const availableHeight = Math.max(1, artifactModalFrame.clientHeight - 32);
+      artifactFitScale = Math.min(
+        availableWidth / artifactModalImage.naturalWidth,
+        availableHeight / artifactModalImage.naturalHeight,
+        1
+      );
+    }
+
+    function fitArtifactToFrame() {
+      calculateArtifactFitScale();
+      updateArtifactZoom(artifactFitScale, false);
+    }
+
+    function initializeArtifactViewer() {
+      calculateArtifactFitScale();
+      updateArtifactZoom(Math.max(artifactFitScale, 0.5), false);
+    }
+
+    function changeArtifactZoom(direction) {
+      const step = Math.max(artifactFitScale * 0.5, 0.1);
+      updateArtifactZoom(artifactScale + direction * step);
+    }
+
+    function openArtifactModal(trigger) {
+      if (!artifactModal || !artifactModalTitle || !artifactModalImage || !artifactOriginalLink) return;
+
+      const previewImage = trigger.querySelector("img");
+      const caseTitle = trigger.closest(".case-card")?.querySelector("h3");
+      if (!previewImage || !caseTitle) return;
+
+      activeArtifactTrigger = trigger;
+      artifactModalTitle.textContent = caseTitle.textContent;
+      artifactModalImage.alt = previewImage.alt;
+      artifactOriginalLink.href = trigger.href;
+      artifactModal.classList.add("open");
+      artifactModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      artifactModalImage.src = trigger.href;
+      if (artifactModalImage.complete) {
+        requestAnimationFrame(initializeArtifactViewer);
+      }
+      artifactCloseButton?.focus();
+    }
+
+    function closeArtifactModal() {
+      if (!artifactModal) return;
+      artifactModal.classList.remove("open");
+      artifactModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      activeArtifactTrigger?.focus();
+      activeArtifactTrigger = null;
+    }
+
+    artifactOpenButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        openArtifactModal(button);
+      });
+    });
+
+    artifactCloseButton?.addEventListener("click", closeArtifactModal);
+    artifactModalImage?.addEventListener("load", initializeArtifactViewer);
+    artifactZoomOutButton?.addEventListener("click", () => changeArtifactZoom(-1));
+    artifactZoomInButton?.addEventListener("click", () => changeArtifactZoom(1));
+    artifactZoomFitButton?.addEventListener("click", fitArtifactToFrame);
+
+    artifactModalFrame?.addEventListener("dblclick", () => changeArtifactZoom(1));
+
+    artifactModalFrame?.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      artifactPanStart = {
+        x: event.clientX,
+        y: event.clientY,
+        left: artifactModalFrame.scrollLeft,
+        top: artifactModalFrame.scrollTop
+      };
+      artifactModalFrame.classList.add("is-dragging");
+      artifactModalFrame.setPointerCapture(event.pointerId);
+    });
+
+    artifactModalFrame?.addEventListener("pointermove", (event) => {
+      if (!artifactPanStart) return;
+      artifactModalFrame.scrollLeft = artifactPanStart.left - (event.clientX - artifactPanStart.x);
+      artifactModalFrame.scrollTop = artifactPanStart.top - (event.clientY - artifactPanStart.y);
+    });
+
+    function stopArtifactPan(event) {
+      if (!artifactModalFrame || !artifactPanStart) return;
+      artifactPanStart = null;
+      artifactModalFrame.classList.remove("is-dragging");
+      if (artifactModalFrame.hasPointerCapture(event.pointerId)) {
+        artifactModalFrame.releasePointerCapture(event.pointerId);
+      }
+    }
+
+    artifactModalFrame?.addEventListener("pointerup", stopArtifactPan);
+    artifactModalFrame?.addEventListener("pointercancel", stopArtifactPan);
+
+    if (artifactModal) {
+      artifactModal.addEventListener("click", (event) => {
+        if (event.target === artifactModal) {
+          closeArtifactModal();
+        }
+      });
+    }
+
+    function getTranslation(key) {
+      const language = localStorage.getItem("siteLanguage") || "ua";
+      return translations[language]?.[key] || translations.ua[key] || "";
+    }
+
+    async function loadDocumentContent() {
+      if (!documentModalText || documentLoaded) return;
+
+      documentModalText.textContent = getTranslation("cases.card9.loading");
+      try {
+        const response = await fetch("assets/cases/user-management-requirements.txt");
+        if (!response.ok) {
+          throw new Error(`Document request failed with status ${response.status}`);
+        }
+        const buffer = await response.arrayBuffer();
+        documentModalText.textContent = new TextDecoder("utf-8").decode(buffer);
+        documentLoaded = true;
+      } catch (error) {
+        documentModalText.textContent = getTranslation("cases.card9.error");
+      }
+    }
+
+    function openDocumentModal(trigger) {
+      if (!documentModal) return;
+      activeDocumentTrigger = trigger;
+      documentModal.classList.add("open");
+      documentModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      if (documentModalFrame) {
+        documentModalFrame.scrollTop = 0;
+      }
+      loadDocumentContent();
+      documentCloseButton?.focus();
+    }
+
+    function closeDocumentModal() {
+      if (!documentModal) return;
+      documentModal.classList.remove("open");
+      documentModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      activeDocumentTrigger?.focus();
+      activeDocumentTrigger = null;
+    }
+
+    documentOpenCards.forEach((card) => {
+      card.addEventListener("click", () => openDocumentModal(card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openDocumentModal(card);
+        }
+      });
+    });
+
+    documentCloseButton?.addEventListener("click", closeDocumentModal);
+
+    if (documentModal) {
+      documentModal.addEventListener("click", (event) => {
+        if (event.target === documentModal) {
+          closeDocumentModal();
+        }
+      });
+    }
+
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && bpmnModal && bpmnModal.classList.contains("open")) {
         closeBpmnModal();
+      }
+      if (event.key === "Escape" && artifactModal && artifactModal.classList.contains("open")) {
+        closeArtifactModal();
+      }
+      if (event.key === "Escape" && documentModal && documentModal.classList.contains("open")) {
+        closeDocumentModal();
       }
     });
   </script>
